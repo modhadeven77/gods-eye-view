@@ -21,7 +21,7 @@ export function standaloneConfig(
     if (process.env[key] === undefined) process.env[key] = value;
   }
   const tools = standaloneVoiceTools();
-  return createBrowserViteConfig({
+  const config = createBrowserViteConfig({
     plugins: [
       ...localProviderPlugins({
         realtime: { tools },
@@ -42,6 +42,28 @@ export function standaloneConfig(
     allowedHosts: resolveAllowedHosts(process.env.GEV_ALLOWED_HOSTS),
     command,
   });
+  // Keep the globe's traveler panel and its booking API on the same origin.
+  const proxy = {
+    '^/sprw/api/(?:airports|flights|bookings)(?:\\?|$)': {
+      target: 'http://127.0.0.1:8787',
+      rewrite: (path) => path.slice('/sprw'.length),
+    },
+    '^/sprw/(?:index\\.html|app\\.js|map\\.js|styles\\.css)?(?:\\?|$)': {
+      target: 'http://127.0.0.1:4173',
+      rewrite: (path) => path.slice('/sprw'.length),
+      configure(proxyServer) {
+        proxyServer.on('proxyRes', (response) => {
+          response.headers['x-frame-options'] = 'SAMEORIGIN';
+          response.headers['content-security-policy'] =
+            "default-src 'self'; frame-ancestors 'self'; object-src 'none'; base-uri 'none'; form-action 'self'";
+          response.headers['x-content-type-options'] = 'nosniff';
+        });
+      },
+    },
+  };
+  config.server.proxy = proxy;
+  config.preview.proxy = proxy;
+  return config;
 }
 
 export default defineConfig(standaloneConfig);

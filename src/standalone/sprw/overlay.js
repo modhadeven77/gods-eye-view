@@ -58,7 +58,7 @@ function planeImage() {
 /** Reuse the independent Sprw frontend and the globe's existing live providers. */
 export function mountSprwOverlay({ scene, data, defer }) {
   const viewer = scene.viewer;
-  const url = new URL('http://127.0.0.1:4173/');
+  const url = new URL('/sprw/', location.origin);
   url.searchParams.set('embedOrigin', location.origin);
   const host = document.createElement('section');
   host.className = 'sprw-globe';

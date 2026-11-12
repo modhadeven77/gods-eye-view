@@ -71,3 +71,6 @@
     height: min(480px, calc(100dvh - 280px));
   }
 }
+#gev-voice-control {
+  display: none !important;
+}

@@ -1,0 +1,73 @@
+.sprw-globe {
+  position: fixed;
+  left: 16px;
+  top: 100px;
+  z-index: 100;
+  max-width: calc(100vw - 32px);
+  font:
+    13px Inter,
+    'Segoe UI',
+    sans-serif;
+  color: #172329;
+}
+.sprw-globe details {
+  width: min(390px, calc(100vw - 32px));
+  background: #fff;
+  border: 1px solid #e8e5ef;
+  border-radius: 12px;
+  box-shadow: 0 5px 20px #0003;
+  overflow: hidden;
+}
+.sprw-globe summary {
+  cursor: pointer;
+  padding: 10px 14px;
+  font-weight: 700;
+}
+.sprw-globe iframe {
+  display: none;
+}
+.sprw-globe details[open] iframe {
+  display: block;
+  width: 100%;
+  height: min(650px, calc(100dvh - 240px));
+  border: 0;
+}
+.sprw-globe > button {
+  display: block;
+  margin-top: 8px;
+  background: #5b35df;
+  color: white;
+  border: 0;
+  border-radius: 7px;
+  padding: 9px 12px;
+  cursor: pointer;
+  font: inherit;
+}
+.sprw-globe > button:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+.sprw-globe > p {
+  background: #fffe;
+  border-radius: 7px;
+  padding: 7px 10px;
+  max-width: 390px;
+  font-size: 11px;
+  line-height: 1.4;
+}
+.sprw-globe :focus-visible {
+  outline: 2px solid #5b35df;
+  outline-offset: 2px;
+}
+@media (max-width: 600px) {
+  .sprw-globe {
+    top: 80px;
+    left: 8px;
+  }
+  .sprw-globe details {
+    width: min(310px, 57vw);
+  }
+  .sprw-globe details[open] iframe {
+    height: min(480px, calc(100dvh - 280px));
+  }
+}

@@ -38,6 +38,14 @@ _“pretty cool”_ — [Brendan Eich](https://x.com/BrendanEich/status/20945920
 
 ---
 
+## Sprw flight and current-event overlays
+
+Start the companion Sprw Backend/API on port 8787 and the Sprw Frontend on http://127.0.0.1:4173/ from their separate repositories, using the frontend revision that includes the globe integration. Start this fork with npm ci followed by npm run dev.
+
+Open **Flight search** on the globe to search demo fares, preview an outbound itinerary, and create a demo reservation. Hover or focus a flight to fly along its route in satellite imagery.
+
+The globe enables its existing News, Earthquakes, active fires, fire perimeters, and Cyclones layers on startup. Use **Enable current events** to re-enable them after turning them off. The Layers panel shows each provider’s coverage, freshness, and availability. The News layer uses GDELT for mapped conflict reporting by default. Optional news sources and geographic coverage are documented in DATA_SOURCES.md.
+
 ## 🌍 Why This Exists
 
 God's Eye View brings public signals into one explorable globe. Track the world live. Talk to it. Break it. Extend it.

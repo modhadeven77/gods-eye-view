@@ -1,3 +1,4 @@
+import { mountSprwOverlay } from './sprw/overlay.js';
 import { createStandaloneCatalog } from './catalog.js';
 import { createStandalonePlaceSearch } from './placeSearch.js';
 import { CITY_POIS } from '../cityPois.js';
@@ -99,7 +100,15 @@ export function createStandaloneApplication({
       }),
     createData: (context) =>
       createStandaloneData({ ...context, allowQaRegistration, catalog }),
-    createTools: (context) =>
-      createStandaloneTools({ ...context, loadingScreen, placeSearch, voice }),
+    createTools: (context) => {
+      const tools = createStandaloneTools({
+        ...context,
+        loadingScreen,
+        placeSearch,
+        voice,
+      });
+      mountSprwOverlay(context);
+      return tools;
+    },
   });
 }
